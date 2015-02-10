@@ -1,67 +1,35 @@
-/// <reference path="../Structures/hashtable.ts" />
-/// <reference path="../Structures/stacklist.ts" />
+class Scope:
+    def __init__(self):
+        self.pc = 0;
+        self.variables = {}
+        self.lvalue = self
+        self.ralue = self
+        self.stack = []
+
+        def GetVar(self, name):
+            if name in self.variables:
+                return self.variables[name]
+            else:
+                return None
+
+        def SetVar(self, name, value):
+            self.variables[name] = value
+
+        def Step(self):
+            self.pc = self.pc+1
+
+        def SetPC(self,number=None):
+            if number is not None:
+                self.pc = number
+            return self.pc
 
 
-module jazzy.Interperter {
-    export class Scope<T>{
-        private _pc: number;
-        private _variables: structure.HashTable<T>;
-        private _lvalue: Scope<T>;
-        private _rvalue: Scope<T>;
-        private _stack: structure.StackList<T>;
+        def LValue(self, newScope = None ):
+            if newScope is not None:
+                self.lvalue = newScope
+            return self.lvalue
 
-    constructor(){
-      this.pc = 0;
-      this.variables = new Structure.HashTable<T>();
-      this.stack =  new Structure.StackList<T>();
-    }
-
-        constructor(pc?: number) {
-            this._pc = pc || 0;
-            this._variables = new structure.HashTable<T>();
-            this._stack = new structure.StackList<T>();
-            this._lvalue = this;
-            this._rvalue = this;
-        }
-
-        public GetVar(name: string): T {
-            if (this._variables.Contains(name))
-                return this._variables.Get(name);
-            else
-                return null;
-        }
-
-        public SetVar(name: string, value: T): void {
-            this._variables.Set(name, value);
-        }
-
-        public Step(): void {
-            this._pc++;
-        }
-
-        public PC(val?: number): number {
-            if (typeof val != "undefined") {
-                this._pc = val;
-            }
-            return this._pc;
-        }
-
-        public Stack(): structure.StackList<T> {
-            return this._stack;
-        }
-
-        public LValue(scope?: Scope<T>): Scope<T> {
-            if (typeof scope != "undefined") {
-                this._lvalue = scope;
-            }
-            return this._lvalue;
-        }
-
-        public RValue(scope?: Scope<T>): Scope<T> {
-            if (typeof scope != "undefined") {
-                this._rvalue = scope;
-            }
-            return this._rvalue;
-        }
-    }
-}
+        def RValue(self, newScope = None ):
+            if newScope is not None:
+                self.rvalue = newScope
+            return self.rvalue

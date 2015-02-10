@@ -1,51 +1,35 @@
+# class interface GenericInterperter {
+#         CreateScope: Function;
+#         DestroyScope: Function;
+#         GoTo: Function;
+#     }
+from interperter.scope import Scope
+
+class Interperter:
+    def __init__(self):
+        self.program = []
+        self.scopes = []
+        self.lables = {}
+        self.functions = {}
+        self.curScope = Scope()
+        self.scopes.append(self.curScope);
+
+    def CreateScope(self):
+        # Use -1 as the index since pop() operates on the end of the list
+        self.scopes.append(Scope());
+        self.scopes[-1].PC(self.curScope.PC())
+        return self.scopes[-1]
 
 
-module jazzy.Interperter {
-    export interface GenericInterperter {
-        CreateScope: Function;
-        DestroyScope: Function;
-        GoTo: Function;
-    }
+    def DestroyTopScope(self):
+        old = self.scopes.pop();
+        self.curScope = self.scopes[-1];
+        return old;
 
-    export class Interperter<T> {
-        private _scopes: structure.StackList<Scope<T>>;
-        private _lables: structure.HashTable<number>;
-        private _functions: structure.HashTable<Funcs.JazFunc>;
-        private _program: string[];
-        private _curScope: Scope<T>;
+    def GoTo(self, line) :
+        if line < self.program.count():
+            self.curScope.PC(line);
 
-        constructor() {
-            this._program = [];
-            this._scopes = new structure.StackList<Scope<T>>();
-            this._lables = new structure.HashTable<number>();
-            this._functions = new structure.HashTable<Funcs.JazFunc>();
-            this._curScope = new Scope<T>();
-            this._scopes.Push(this._curScope);
-        }
-
-        public CreateScope(): Scope<T> {
-            this._scopes.Push(new Scope<T>(this._curScope.PC()));
-            return this._scopes.Get(0);
-        }
-
-        public DestroyTopScope(): Scope<T> {
-            var old = this._scopes.Pop();
-            this._curScope = this._scopes.Get(0);
-            return old;
-        }
-
-        public GoTo(line: number) {
-            if (line < this._program.length) {
-                this._curScope.PC(line);
-            }
-        }
-
-        public Exec(instruction: string) {
-
-        }
-
-
-
-
-    }
-}
+    def Exec(self, instruction) :
+        action, arg = instruction.split(' ', 1)
+        print("Running: "+action+" with "+arg)
