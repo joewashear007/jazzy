@@ -1,11 +1,11 @@
 
 def main():
     print("Running Jazzy!")
-    import interperter.interperter
-    intrp = interperter.interperter.Interperter()
+    import interperter
+    intrp = interperter.Interperter()
 
     action = input(">>")
-    intrp.Exec(action)
+    print(intrp.Exec(action))
 
 
 
