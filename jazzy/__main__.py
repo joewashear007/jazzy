@@ -1,8 +1,19 @@
+import functions
+import interpreter
+
 
 def main():
     print("Running Jazzy!")
-    import interperter
-    intrp = interperter.Interperter()
+    intrp = interpreter.Interpreter()
+
+    #Register the Funcitons
+    for mod in functions.__all__:
+        __import__("functions."+mod)
+        mofFunc = getattr(functions, "OutputFunc")
+        for func in mofFunc.Functions:
+            funcClass = getattr(mofFunc, func)
+            jazFunc = funcClass()
+            intrp.RegisterFunction(jazFunc.command, jazFunc)
 
     action = input(">>")
     print(intrp.Exec(action))

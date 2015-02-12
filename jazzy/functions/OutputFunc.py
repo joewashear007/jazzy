@@ -16,5 +16,6 @@ class jazShow:
     def call(self, interpreter, arg):
         return arg;
 
-
+# A dictionary of the classes in this file
+# used to autoload the functions
 Functions = {'jazShow': jazShow, 'jazPrint': jazPrint}

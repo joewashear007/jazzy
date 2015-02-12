@@ -1,16 +1,15 @@
-# class interface GenericInterperter {
+# class interface Genericinterpreter {
 #         CreateScope: Function;
 #         DestroyScope: Function;
 #         GoTo: Function;
 #     }
 from scope import Scope
-from functions import OutputFunc
 from errors import *
 
 
 debug = True
 
-class Interperter:
+class Interpreter:
     def __init__(self):
         self.program = []
         self.scopes = []
@@ -18,9 +17,7 @@ class Interperter:
         self.functions = {}
         self.curScope = Scope()
         self.scopes.append(self.curScope);
-        for func in OutputFunc.Functions:
-            jazFunc = OutputFunc.Functions[func]()
-            self.RegisterFunction(jazFunc.command, jazFunc)
+
 
 
     def CreateScope(self):

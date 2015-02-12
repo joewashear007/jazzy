@@ -4,7 +4,7 @@ except ImportError:
     from distutils.core import setup
 
 config = {
-    'description': 'jazzy - jaz language interperter',
+    'description': 'jazzy - jaz language interpreter',
     'author': 'Joseph Livecchi, Antohny Bier, ',
     'url': 'URL to get it at.',
     'download_url': 'Where to download it.',
