@@ -22,7 +22,7 @@ def RegisterFunctions(intrp):
     #Register the Funcitons
     for mod in functions.__all__:
         __import__("functions."+mod)
-        mofFunc = getattr(functions, "OutputFunc")
+        mofFunc = getattr(functions, mod)
         for func in mofFunc.Functions:
             try:
                 funcClass = getattr(mofFunc, func)

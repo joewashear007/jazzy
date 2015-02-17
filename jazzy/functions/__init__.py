@@ -1,1 +1,1 @@
-__all__ = ['OutputFunc']
+__all__ = ['OutputFunc', 'StackFunc']
