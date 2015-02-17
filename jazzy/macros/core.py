@@ -1,7 +1,9 @@
 __all__ = ["LabelMacro"]
 
+import re
+
 class LabelMacro:
-    def __init__():
+    def __init__(self):
         self.regex = re.compile("label\s.+")
 
     def testline(self, line):

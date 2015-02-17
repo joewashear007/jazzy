@@ -1,6 +1,7 @@
 import sys
 import functions
 import interpreter
+import preprocessor
 from errors import *;
 
 
@@ -17,11 +18,6 @@ def main(args):
         #read from std in
         RunSdtIn(intrp)
 
-
-
-
-
-
 def RegisterFunctions(intrp):
     #Register the Funcitons
     for mod in functions.__all__:
@@ -32,7 +28,7 @@ def RegisterFunctions(intrp):
                 funcClass = getattr(mofFunc, func)
                 jazFunc = funcClass()
                 intrp.RegisterFunction(jazFunc.command, jazFunc)
-            except err:
+            except Exception as err:
                 print(err.message)
 
 def RunSdtIn(intrp):
@@ -45,11 +41,17 @@ def RunSdtIn(intrp):
 
 def RunFile(intrp, filename):
     try:
-        file = open(filename, 'r')
-        for line in file:
-            output = intrp.Exec(line)
-            print(output)
-    except err:
+        processor = preprocessor.Preprocessor()
+        code = processor.parseFile(filename)
+        labels = processor.GetLabels()
+        intrp.SetLabels(labels)
+        for line in code:
+            try:
+                output = intrp.Exec(line)
+                print(output)
+            except CommandNotFoundError as error:
+                print(error.message)
+    except Exception as err:
         print(err)
 
 

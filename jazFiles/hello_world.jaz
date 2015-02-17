@@ -1,1 +1,3 @@
-show Hello World
+show World
+label l1
+show Hello

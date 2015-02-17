@@ -10,15 +10,16 @@ from errors import *
 debug = True
 
 class Interpreter:
-    def __init__(self):
+    def __init__(self, labels = {}):
         self.program = []
         self.scopes = []
-        self.lables = {}
+        self.lables = labels
         self.functions = {}
         self.curScope = Scope()
         self.scopes.append(self.curScope);
 
-
+    def SetLabels(self, labels):
+        self.labels = labels
 
     def CreateScope(self):
         # Use -1 as the index since pop() operates on the end of the list
@@ -45,8 +46,8 @@ class Interpreter:
             arg = split_inst[1]
         else:
             arg = ""
-        if debug:
-            print("#Debug: Running: "+action+" with "+arg)
+        # if debug:
+        #     print("#Debug: Running: "+action+" with "+arg)
         if action in self.functions:
             return self.functions[action].call(self, arg)
         else:
