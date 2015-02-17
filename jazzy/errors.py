@@ -9,5 +9,4 @@ class FunctionExistError(JazError):
 
 class CommandNotFoundError(JazError):
     def __init__(self, action):
-        self.name = name
-        self.message = "Command " + action + " not found!";
+        self.message = "Command '" + action + "' not found!";
