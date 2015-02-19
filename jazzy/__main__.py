@@ -32,12 +32,15 @@ def RegisterFunctions(intrp):
                 print(err.message)
 
 def RunSdtIn(intrp):
-    action = input(">>")
-    try:
-        output  =intrp.Exec(action)
-        print(output)
-    except CommandNotFoundError as err:
-        print(err.message)
+    while not intrp.isFinished():
+        print("")
+        action = input(">>")
+        try:
+            output = intrp.Exec(action)
+            if output is not None:
+                print(output)
+        except CommandNotFoundError as err:
+            print(err.message)
 
 def RunFile(intrp, filename):
     try:
