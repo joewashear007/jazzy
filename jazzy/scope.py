@@ -1,10 +1,12 @@
+import uuid
 class Scope:
     def __init__(self):
         self.pc = 0;
         self.variables = {}
         self.lvalue = self
-        self.ralue = self
+        self.rvalue = self
         self.stack = [1,2,3]
+        self.name = uuid.uuid1()
 
     def GetVar(self, name):
         if name in self.variables:
@@ -18,7 +20,7 @@ class Scope:
     def Step(self):
         self.pc = self.pc+1
 
-    def SetPC(self,number=None):
+    def PC(self,number=None):
         if number is not None:
             self.pc = number
         return self.pc

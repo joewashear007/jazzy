@@ -39,7 +39,7 @@ def RunSdtIn(intrp):
             output = intrp.Exec(action)
             if output is not None:
                 print(output)
-        except CommandNotFoundError as err:
+        except Exception as err:
             print(err.message)
 
 def RunFile(intrp, filename):
@@ -52,7 +52,7 @@ def RunFile(intrp, filename):
             try:
                 output = intrp.Exec(line)
                 print(output)
-            except CommandNotFoundError as error:
+            except Exception as error:
                 print(error.message)
     except Exception as err:
         print(err)

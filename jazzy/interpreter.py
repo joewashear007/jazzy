@@ -22,6 +22,9 @@ class Interpreter:
     def SetLabels(self, labels):
         self.labels = labels
 
+    def GetLabel(self, name):
+        return self.labels[name]
+
     def CreateScope(self):
         # Use -1 as the index since pop() operates on the end of the list
         self.scopes.append(Scope());
@@ -29,9 +32,12 @@ class Interpreter:
         return self.scopes[-1]
 
     def DestroyTopScope(self):
-        old = self.scopes.pop();
-        self.curScope = self.scopes[-1];
-        return old;
+        if len(self.scopes) > 1:
+            old = self.scopes.pop();
+            self.curScope = self.scopes[-1];
+            return old;
+        else:
+            raise StackUnderFlowError("On the Root Stack!, Use 'halt' to quit")
 
     def GoTo(self, line) :
         if line < self.program.count():
@@ -60,8 +66,8 @@ class Interpreter:
         print("#Debug: Halting Program")
         self.running = False
 
-    def GetScope(self):
-        return self.scopes[-1];
+    def GetScope(self, num = -1):
+        return self.scopes[num];
 
     def RegisterFunction(self, name, func):
         if name not in self.functions:

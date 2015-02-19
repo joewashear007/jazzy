@@ -10,3 +10,7 @@ class FunctionExistError(JazError):
 class CommandNotFoundError(JazError):
     def __init__(self, action):
         self.message = "Command '" + action + "' not found!";
+
+class StackUnderFlowError(JazError):
+    def __init__(self, action):
+        self.message = action;
