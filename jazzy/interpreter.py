@@ -11,6 +11,7 @@ debug = True
 
 class Interpreter:
     def __init__(self, labels = {}):
+        self.running = True
         self.program = []
         self.scopes = []
         self.lables = labels
@@ -26,7 +27,6 @@ class Interpreter:
         self.scopes.append(Scope());
         self.scopes[-1].PC(self.curScope.PC())
         return self.scopes[-1]
-
 
     def DestroyTopScope(self):
         old = self.scopes.pop();
@@ -52,6 +52,13 @@ class Interpreter:
             return self.functions[action].call(self, arg)
         else:
             raise CommandNotFoundError(action)
+
+    def isFinished(self):
+        return not self.running
+
+    def Halt(self):
+        print("#Debug: Halting Program")
+        self.running = False
 
     def GetScope(self):
         return self.scopes[-1];
