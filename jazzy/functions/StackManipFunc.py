@@ -5,6 +5,7 @@ class jazPush:
         self.command = "push";
 
     def call(self, interpreter, arg):
+        pass
         #return interpreter.GetScope().GetStackTop()
 
 class jazRvalue:
@@ -12,6 +13,7 @@ class jazRvalue:
         self.command = "rvalue";
 
     def call(self, interpreter, arg):
+        pass
         #return interpreter.GetScope().GetStackTop()
 
 class jazLvalue:
@@ -19,6 +21,7 @@ class jazLvalue:
         self.command = "lvalue";
 
     def call(self, interpreter, arg):
+        pass
         #return arg;
 
 class jazPop:
@@ -26,6 +29,7 @@ class jazPop:
         self.command = "pop";
 
     def call(self, interpreter, arg):
+        pass
         #return arg;
 
 class jazAssign:
@@ -33,6 +37,7 @@ class jazAssign:
         self.command = ":=";
 
     def call(self, interpreter, arg):
+        pass
         #return arg;
 
 class jazCopy:
@@ -40,6 +45,7 @@ class jazCopy:
         self.command = "copy";
 
     def call(self, interpreter, arg):
+        pass
         #return arg;
 
 # A dictionary of the classes in this file
