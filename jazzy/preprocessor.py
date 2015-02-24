@@ -6,9 +6,7 @@ class Preprocessor:
         self._lines = []
         self.regex = re.compile("label\s(?P<name>.+)")
 
-    def parseFile(self, filename):
-		#Use reverse to be able to use list as stack
-        file = open(filename, 'r')
+    def parseFile(self, file):
         lineNumber = 1
         for line in file:
             # print("#Reading: "+line)

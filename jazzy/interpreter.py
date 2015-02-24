@@ -39,8 +39,6 @@ class Interpreter:
         if len(instruction) < 1:
             return "No instruction"
 
-        #Adds the line to the internal program
-        self.program.append(instruction)
         #Find the argument of the program
         split_inst = instruction.split(' ', 1)
         action = split_inst[0]
@@ -56,14 +54,17 @@ class Interpreter:
             raise CommandNotFoundError(action)
 
     def ExecNext(self):
+        out = self.Exec(self.program[self.curScope.PC()])
         self.curScope.Step()
-        return self.Exec(self.program[self.curScope.PC()])
+        if self.curScope.PC() == len(self.program) :
+            self.Halt()
+        return out
 
     def isFinished(self):
         return not self.running
 
     def Halt(self):
-        print("#Debug: Halting Program")
+        # print("#Debug: Halting Program")
         self.running = False
 
     def GetScope(self, num = -1):
