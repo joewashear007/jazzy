@@ -22,6 +22,7 @@ class Scope:
             return list(self.variables.keys()).index(name)
         else:
             return None
+            
     def GetVarFromAddress(self, addr):
         _vars = list(self.variables.keys())
         if addr < len(_vars):

@@ -1,8 +1,3 @@
-# class interface Genericinterpreter {
-#         CreateScope: Function;
-#         DestroyScope: Function;
-#         GoTo: Function;
-#     }
 from scope import Scope
 from errors import *
 
@@ -18,9 +13,6 @@ class Interpreter:
         self.functions = {}
         self.curScope = Scope()
         self.scopes.append(self.curScope);
-
-    def SetLabels(self, labels):
-        self.labels = labels
 
     def GetLabel(self, name):
         return self.labels[name]
@@ -46,6 +38,10 @@ class Interpreter:
     def Exec(self, instruction) :
         if len(instruction) < 1:
             return "No instruction"
+
+        #Adds the line to the internal program
+        self.program.append(instruction)
+        #Find the argument of the program
         split_inst = instruction.split(' ', 1)
         action = split_inst[0]
         if len(split_inst) is 2:
@@ -58,6 +54,10 @@ class Interpreter:
             return self.functions[action].call(self, arg)
         else:
             raise CommandNotFoundError(action)
+
+    def ExecNext(self):
+        self.curScope.Step()
+        return self.Exec(self.program[self.curScope.PC()])
 
     def isFinished(self):
         return not self.running

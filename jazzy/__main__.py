@@ -47,15 +47,17 @@ def RunFile(intrp, filename):
         processor = preprocessor.Preprocessor()
         code = processor.parseFile(filename)
         labels = processor.GetLabels()
-        intrp.SetLabels(labels)
-        for line in code:
-            try:
-                output = intrp.Exec(line)
-                print(output)
-            except Exception as error:
-                print(error.message)
+        intrp.labels = labels
+        intrp.program = code
+        while not intrp.isFinished():
+            output = intrp.ExecNext()
+            print(output)
+    except CommandNotFoundError as error:
+        print("Error! -- " + error.message)
+    except StackUnderFlowError as error:
+        print("Error! -- " + error.message)
     except Exception as err:
-        print(err)
+        print("Error! -- " + err)
 
 
 if __name__ == "__main__":
