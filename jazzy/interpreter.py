@@ -1,5 +1,5 @@
-from scope import Scope
-from errors import *
+from jazzy.scope import Scope
+from jazzy.errors import *
 
 
 debug = True

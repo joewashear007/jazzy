@@ -6,14 +6,19 @@ except ImportError:
 config = {
     'description': 'jazzy - jaz language interpreter',
     'author': 'Joseph Livecchi, Antohny Bier, ',
-    'url': 'URL to get it at.',
-    'download_url': 'Where to download it.',
+    'url': 'https://github.com/joewashear007/jazzy',
+    'download_url': 'https://github.com/joewashear007/jazzy/archive/master.zip',
     'author_email': 'joewashear007@gmail.com',
     'version': '0.1',
     'install_requires': ['nose'],
-    'packages': ['jazzy'],
-    'scripts': [],
-    'name': 'jazzy'
+    'packages': ['jazzy', 'jazzy.functions'],
+    'package_dir' : {'jazzy': 'jazzy'},
+    'name': 'jazzy',
+    'entry_points':{
+        'console_scripts': [
+            'jazzy = jazzy.module:main',
+        ],
+    },
 }
 
 setup(**config)
