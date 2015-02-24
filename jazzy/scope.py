@@ -17,6 +17,20 @@ class Scope:
     def SetVar(self, name, value):
         self.variables[name] = value
 
+    def GetAddress(self, name):
+        if name in self.variables:
+            return list(self.variables.keys()).index(name)
+        else:
+            return None
+    def GetVarFromAddress(self, addr):
+        _vars = list(self.variables.keys())
+        if addr < len(_vars):
+            name = list(self.variables.keys())[addr]
+            return (name, self.variables[name])
+        else:
+            return None
+
+
     def Step(self):
         self.pc = self.pc+1
 
