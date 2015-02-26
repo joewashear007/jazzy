@@ -16,5 +16,5 @@ class StackUnderFlowError(JazError):
         self.message = action;
 
 class UndenfinedVariableError(JazError):
-    def __init__(self, action):
-        self.message = "Variable: " + action + " is being accessed before it is defined!";
+    def __init__(self, name):
+        self.message = "Variable: " + str(name) + " is being accessed before it is defined!";

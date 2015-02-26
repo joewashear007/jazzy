@@ -1,4 +1,5 @@
 import sys
+import os
 import argparse
 import functions
 import interpreter
@@ -59,16 +60,15 @@ def RunFile(intrp, infile, outfile):
         intrp.labels = labels
         intrp.program = code
         while not intrp.isFinished():
-            output= intrp.ExecNext()
+            output = intrp.ExecNext()
             # print(output[-1])
             if output is not None:
                 outfile.write(output)
-    except CommandNotFoundError as error:
-        print("Error! -- " + error.message)
-    except StackUnderFlowError as error:
+                outfile.write(os.linesep)
+    except JazError as error:
         print("Error! -- " + error.message)
     except Exception as err:
-        print("Error! -- " + err)
+        print("Error! -- " + str(err))
 
 
 if __name__ == "__main__":

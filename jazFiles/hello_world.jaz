@@ -1,2 +1,19 @@
-show World
-show Hello
+show
+show This code illustrates parameter passing strategy.
+show
+lvalue f
+push 5
+:=
+lvalue x
+push 0
+:=
+show before function work:
+show value of x is:
+rvalue x
+print
+pop
+show value of f is:
+rvalue f
+print
+pop
+show -------------------

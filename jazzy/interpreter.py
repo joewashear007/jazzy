@@ -40,7 +40,7 @@ class Interpreter:
             return "No instruction"
 
         #Find the argument of the program
-        split_inst = instruction.split(' ', 1)
+        split_inst = instruction.strip().split(' ', 1)
         action = split_inst[0]
         if len(split_inst) is 2:
             arg = split_inst[1]

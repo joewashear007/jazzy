@@ -32,14 +32,15 @@ class Scope:
         try:
             # assume that name is an address of variable
             address = int(name)
-            for var in self.rvalue.variables:
-                print(address, self.rvalue.variables[var])
-                if address == self.rvalue.variables[var][0]:
-                    self.rvalue.variables[var] = (var[0], value)
+            for var in self.lvalue.variables:
+                if address == self.lvalue.variables[var][0]:
+                    self.lvalue.variables[var] = (self.lvalue.variables[var][0], value)
+                    return
+            raise UndenfinedVariableError(name)
         except ValueError:
             # name is not a number
-            if name in self.rvalue.variables:
-                self.rvalue.variables[name] =(self.rvalue.variables[name][0], value)
+            if name in self.lvalue.variables:
+                self.lvalue.variables[name] =(self.lvalue.variables[name][0], value)
             else:
                 raise UndenfinedVariableError(name)
 
