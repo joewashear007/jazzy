@@ -17,23 +17,31 @@ class Scope:
         return self.variables[name]
 
     def GetVar(self, name):
-        if name in self.variables:
-            return self.variables[name][1]
+        if name in self.rvalue.variables:
+            return self.rvalue.variables[name][1]
         else:
             raise UndenfinedVariableError(name)
 
     def GetAddress(self, name):
-        if name in self.variables:
-            return self.variables[name][0]
+        if name in self.lvalue.variables:
+            return self.lvalue.variables[name][0]
         else:
-            return self.CreateVar(name)[0]
+            return self.lvalue.CreateVar(name)[0]
 
-    def GetVarFromAddress(self, addr):
-        if(int(addr) < len(self.variables)):
-            for address, value in self.variables.iteritems():
-                if address is addr:
-                    return value;
-        return None
+    def SetVar(self, name, value):
+        try:
+            # assume that name is an address of variable
+            address = int(name)
+            for var in self.rvalue.variables:
+                print(address, self.rvalue.variables[var])
+                if address == self.rvalue.variables[var][0]:
+                    self.rvalue.variables[var] = (var[0], value)
+        except ValueError:
+            # name is not a number
+            if name in self.rvalue.variables:
+                self.rvalue.variables[name] =(self.rvalue.variables[name][0], value)
+            else:
+                raise UndenfinedVariableError(name)
 
 
     def Step(self):

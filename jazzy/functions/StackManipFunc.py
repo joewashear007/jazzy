@@ -39,8 +39,11 @@ class jazAssign:
         self.command = ":="
 
     def call(self, interpreter, arg):
-        pass
-        #return arg;
+        value = interpreter.GetScope().stack.pop()
+        addr = interpreter.GetScope().stack.pop()
+        print(addr, value)
+        interpreter.GetScope().SetVar(addr, value)
+        return None
 
 class jazCopy:
     def __init__(self):
