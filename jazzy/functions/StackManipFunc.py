@@ -13,8 +13,8 @@ class jazRvalue:
         self.command = "rvalue"
 
     def call(self, interpreter, arg):
-        var = interpreter.GetScope().GetVarFromAddress(arg)
-        interpreter.GetScope().stack.append(var)
+        value = interpreter.GetScope().GetVar(arg)
+        interpreter.GetScope().stack.append(value)
         return None
 
 class jazLvalue:

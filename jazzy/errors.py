@@ -14,3 +14,7 @@ class CommandNotFoundError(JazError):
 class StackUnderFlowError(JazError):
     def __init__(self, action):
         self.message = action;
+
+class UndenfinedVariableError(JazError):
+    def __init__(self, action):
+        self.message = "Variable: " + action + " is being accessed before it is defined!";

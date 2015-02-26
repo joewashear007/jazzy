@@ -50,8 +50,8 @@ class jazStackInfo:
                 scope = interpreter.scopes[int(arg)]
                 info = "Scope: "+str(scope.name)+"\n"
                 info += "* PC : " + str(scope.pc) + "\n"
-                info += "* Num Vars : " + str(len(scope.variables)) + "\n"
-                info += "* Stack Size : " + str(len(scope.stack)) + "\n"
+                info += "* Vars : " + str(scope.variables) + "\n"
+                info += "* Stack: " + str(scope.stack) + "\n"
                 if scope.name == scope.lvalue.name:
                     info += "* LScope : self\n"
                 else:

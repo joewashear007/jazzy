@@ -21,7 +21,7 @@ class jazGoto:
         self.command = "goto";
 
     def call(self, interpreter, arg):
-        if arg is in interpreter.labels:
+        if arg in interpreter.labels:
             interpreter.GoTo(interpreter.labels[arg])
         return none
 

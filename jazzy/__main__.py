@@ -45,8 +45,10 @@ def RunSdtIn(intrp):
             output = intrp.Exec(action)
             if output is not None:
                 print(output)
+        except JazError as error:
+            print("Error! -- " + error.message)
         except Exception as err:
-            print(err.message)
+            print("Error! -- " + str(err))
 
 def RunFile(intrp, infile, outfile):
     # output = []

@@ -1,36 +1,39 @@
 import uuid
+from errors import *
 class Scope:
     def __init__(self):
         self.pc = 0;
-        self.variables = {'9':5}
+        self.variables = {}
         self.lvalue = self
         self.rvalue = self
         self.stack = [1, 2, 3]
         self.name = uuid.uuid1()
 
+    def CreateVar(self, name):
+        # creates a variable with default value
+        # each value in the dictionary is (address, value)
+        # the var_addr maps the address of a var to its na,e
+        self.variables[name] = (len(self.variables), 0)
+        return self.variables[name]
+
     def GetVar(self, name):
         if name in self.variables:
-            return self.variables[name]
+            return self.variables[name][1]
         else:
-            return None
-
-    def SetVar(self, name, value = 0):
-        self.variables[name] = value
+            raise UndenfinedVariableError(name)
 
     def GetAddress(self, name):
         if name in self.variables:
-            return list(self.variables.keys()).index(name)
+            return self.variables[name][0]
         else:
-            self.variables[name] = 0
-            return list(self.variables.keys()).index(name)
+            return self.CreateVar(name)[0]
 
     def GetVarFromAddress(self, addr):
-        _vars = list(self.variables.keys())
-        if addr < len(_vars):
-            name = list(self.variables.keys())[addr]
-            return (name, self.variables[name])
-        else:
-            return None
+        if(int(addr) < len(self.variables)):
+            for address, value in self.variables.iteritems():
+                if address is addr:
+                    return value;
+        return None
 
 
     def Step(self):
