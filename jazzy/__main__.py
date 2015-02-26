@@ -67,8 +67,8 @@ def RunFile(intrp, infile, outfile):
                 outfile.write(os.linesep)
     except JazError as error:
         print("Error! -- " + error.message)
-    except Exception as err:
-        print("Error! -- " + str(err))
+    # except Exception as err:
+    #     print("Error! -- " + str(err))
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ class Interpreter:
         self.running = True
         self.program = []
         self.scopes = []
-        self.lables = labels
+        self.labels = {}
         self.functions = {}
         self.curScope = Scope()
         self.scopes.append(self.curScope);
@@ -32,7 +32,7 @@ class Interpreter:
             raise StackUnderFlowError("On the Root Stack!, Use 'halt' to quit")
 
     def GoTo(self, line) :
-        if line < self.program.count():
+        if line < len(self.program):
             self.curScope.PC(line);
 
     def Exec(self, instruction) :

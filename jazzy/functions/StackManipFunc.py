@@ -41,7 +41,6 @@ class jazAssign:
     def call(self, interpreter, arg):
         value = interpreter.GetScope().stack.pop()
         addr = interpreter.GetScope().stack.pop()
-        print(addr, value)
         interpreter.GetScope().SetVar(addr, value)
         return None
 

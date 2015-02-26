@@ -1,6 +1,7 @@
 show
 show This code illustrates parameter passing strategy.
 show
+label start_vars
 lvalue f
 push 5
 :=
@@ -16,4 +17,6 @@ show value of f is:
 rvalue f
 print
 pop
+label end_vars
 show -------------------
+stackinfo 0

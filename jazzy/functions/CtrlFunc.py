@@ -14,7 +14,7 @@ class jazLabel:
 
     def call(self, interpreter, arg):
         interpreter.labels[arg] = interpreter.curScope.pc
-        return none
+        return None
 
 class jazGoto:
     def __init__(self):
@@ -23,21 +23,21 @@ class jazGoto:
     def call(self, interpreter, arg):
         if arg in interpreter.labels:
             interpreter.GoTo(interpreter.labels[arg])
-        return none
+        return None
 
 class jazGofalse:
     def __init__(self):
         self.command = "gofalse";
 
     def call(self, interpreter, arg):
-        return none
+        return None
 
 class jazGotrue:
     def __init__(self):
         self.command = "gotrue";
 
     def call(self, interpreter, arg):
-        return none
+        return None
 
 # A dictionary of the classes in this file
 # used to autoload the functions
