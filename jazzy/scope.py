@@ -2,10 +2,10 @@ import uuid
 class Scope:
     def __init__(self):
         self.pc = 0;
-        self.variables = {}
+        self.variables = {'9':5}
         self.lvalue = self
         self.rvalue = self
-        self.stack = [1,2,3]
+        self.stack = [1, 2, 3]
         self.name = uuid.uuid1()
 
     def GetVar(self, name):
@@ -14,14 +14,16 @@ class Scope:
         else:
             return None
 
-    def SetVar(self, name, value):
+    def SetVar(self, name, value = 0):
         self.variables[name] = value
 
     def GetAddress(self, name):
         if name in self.variables:
             return list(self.variables.keys()).index(name)
         else:
-            return None
+            self.variables.update({name: 0})
+            return list(self.variables.keys()).index(name)
+
     def GetVarFromAddress(self, addr):
         _vars = list(self.variables.keys())
         if addr < len(_vars):
