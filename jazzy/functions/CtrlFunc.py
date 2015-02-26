@@ -13,6 +13,7 @@ class jazLabel:
         self.command = "label";
 
     def call(self, interpreter, arg):
+        interpreter.labels[arg] = interpreter.curScope.pc
         return none
 
 class jazGoto:
@@ -20,6 +21,8 @@ class jazGoto:
         self.command = "goto";
 
     def call(self, interpreter, arg):
+        if arg is in interpreter.labels:
+            interpreter.GoTo(interpreter.labels[arg])
         return none
 
 class jazGofalse:
@@ -35,7 +38,7 @@ class jazGotrue:
 
     def call(self, interpreter, arg):
         return none
-        
+
 # A dictionary of the classes in this file
 # used to autoload the functions
 Functions = {'jazHalt': jazHalt, 'jazLabel': jazLabel, 'jazGoto': jazGoto, 'jazGofalse': jazGofalse, 'jazGotrue': jazGotrue}
