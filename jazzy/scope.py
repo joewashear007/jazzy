@@ -21,7 +21,7 @@ class Scope:
         if name in self.variables:
             return list(self.variables.keys()).index(name)
         else:
-            self.variables.update({name: 0})
+            self.variables[name] = 0
             return list(self.variables.keys()).index(name)
 
     def GetVarFromAddress(self, addr):

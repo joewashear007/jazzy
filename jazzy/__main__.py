@@ -1,4 +1,5 @@
 import sys
+import argparse
 import functions
 import interpreter
 import preprocessor
@@ -6,14 +7,19 @@ from errors import *;
 
 
 def main(args):
-    print("Running Jazzy!")
+    parser = argparse.ArgumentParser(description='Jaz Interpreter')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
+    parser.add_argument('outfile', nargs='?', type=argparse.FileType('w'),default=sys.stdout)
+    parser.parse_args();
+    args = parser.parse_args()
 
     intrp = interpreter.Interpreter()
     RegisterFunctions(intrp)
 
-    if(len(args) > 0):
+    if(args.infile is not sys.stdin):
         #run the file
-        RunFile(intrp, args[0])
+        RunFile(intrp, args.infile, args.outfile)
     else:
         #read from std in
         RunSdtIn(intrp)
@@ -42,20 +48,25 @@ def RunSdtIn(intrp):
         except Exception as err:
             print(err.message)
 
-def RunFile(intrp, filename):
+def RunFile(intrp, infile, outfile):
+    # output = []
     try:
         processor = preprocessor.Preprocessor()
-        code = processor.parseFile(filename)
+        code = processor.parseFile(infile)
         labels = processor.GetLabels()
-        intrp.SetLabels(labels)
-        for line in code:
-            try:
-                output = intrp.Exec(line)
-                print(output)
-            except Exception as error:
-                print(error.message)
+        intrp.labels = labels
+        intrp.program = code
+        while not intrp.isFinished():
+            output= intrp.ExecNext()
+            # print(output[-1])
+            if output is not None:
+                outfile.write(output)
+    except CommandNotFoundError as error:
+        print("Error! -- " + error.message)
+    except StackUnderFlowError as error:
+        print("Error! -- " + error.message)
     except Exception as err:
-        print(err)
+        print("Error! -- " + err)
 
 
 if __name__ == "__main__":
