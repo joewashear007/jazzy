@@ -30,6 +30,9 @@ class jazGofalse:
         self.command = "gofalse";
 
     def call(self, interpreter, arg):
+        value = interpreter.GetScope().stack.pop()
+        if value == 0:
+            interpreter.GoTo(interpreter.labels[arg])
         return None
 
 class jazGotrue:
@@ -37,6 +40,9 @@ class jazGotrue:
         self.command = "gotrue";
 
     def call(self, interpreter, arg):
+        value = interpreter.GetScope().stack.pop()
+        if value != 0:
+            interpreter.GoTo(interpreter.labels[arg])
         return None
 
 # A dictionary of the classes in this file

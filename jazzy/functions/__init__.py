@@ -1,1 +1,1 @@
-__all__ = ['OutputFunc', 'SubprgrmCtrlFunc','CtrlFunc', 'StackManipFunc']
+__all__ = ['OutputFunc', 'SubprgrmCtrlFunc','CtrlFunc', 'StackManipFunc', 'ArithmeticOpFunc']
