@@ -20,7 +20,8 @@ class Scope:
         if name in self.rvalue.variables:
             return self.rvalue.variables[name][1]
         else:
-            raise UndenfinedVariableError(name)
+            # raise UndenfinedVariableError(name)
+            return 0
 
     def GetAddress(self, name):
         if name in self.lvalue.variables:

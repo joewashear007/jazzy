@@ -5,7 +5,7 @@ class jazPush:
         self.command = "push"
 
     def call(self, interpreter, arg):
-        interpreter.GetScope().stack.append(arg)
+        interpreter.GetScope().stack.append(int(arg))
         return None
 
 class jazRvalue:

@@ -61,10 +61,9 @@ def RunFile(intrp, infile, outfile):
         intrp.program = code
         while not intrp.isFinished():
             output = intrp.ExecNext()
-            # print(output[-1])
             if output is not None:
-                outfile.write(output)
-                outfile.write(os.linesep)
+                outfile.write(str(output))
+                outfile.write("\n")
     except JazError as error:
         print("Error! -- " + error.message)
     # except Exception as err:
