@@ -25,8 +25,8 @@ class jazOR:
         self.command = "|";
 
     def call(self, interpreter, arg):
-        topValue1 = interpreter.GetScope().pop()
-        topValue2 = interpreter.GetScope().pop()
+        topValue1 = interpreter.GetScope().stack.pop()
+        topValue2 = interpreter.GetScope().stack.pop()
         interpreter.GetScope().stack.append( int(topValue1) | int(topValue2))
         return None
 Functions = {'jazAND': jazAND, 'jazNOT': jazNOT, 'jazOR': jazOR}
