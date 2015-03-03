@@ -19,7 +19,7 @@ class jazSubtract:
     def call(self, interpreter, arg):
         topValue1 = interpreter.GetScope().stack.pop()
         topValue2 = interpreter.GetScope().stack.pop()
-        result = int(topValue1) - int(topValue2)
+        result = int(topValue2) - int(topValue1)
         interpreter.GetScope().stack.append(result)
         return None
 
