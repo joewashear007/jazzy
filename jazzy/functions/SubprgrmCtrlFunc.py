@@ -6,10 +6,7 @@ class jazBegin:
         self.command = "begin";
 
     def call(self, interpreter, arg):
-        #Creates a new Scope
-        #Reassigns the right scrope to allow varible to declared on the new scope
-        interpreter.CreateScope()
-        interpreter.GetScope().RValue(interpreter.GetScope(-2))
+        interpreter.BeginSubroutine()
         return None
 
 class jazEnd:
@@ -17,7 +14,7 @@ class jazEnd:
         self.command = "end";
 
     def call(self, interpreter, arg):
-        interpreter.DestroyTopScope()
+        interpreter.EndSubroutine()
         return None
 
 class jazReturn:
@@ -25,10 +22,7 @@ class jazReturn:
         self.command = "return";
 
     def call(self, interpreter, arg):
-        #Switches the Left and Right Scopes so the varible are assign to the
-        #   parent scope when return from function
-        interpreter.GetScope().RValue(interpreter.GetScope())
-        interpreter.GetScope().LValue(interpreter.GetScope(-2))
+        interpreter.ReturnSubroutine()
         return None
 
 class jazCall:
@@ -36,8 +30,8 @@ class jazCall:
         self.command = "call";
 
     def call(self, interpreter, arg):
-        labelPos = interpreter.GetLabel(arg)
-        interpreter.GoTo(labelPos)
+        interpreter.CallSubroutine(arg)
+        return None
 
 
 class jazStackInfo:

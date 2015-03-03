@@ -7,17 +7,17 @@ class Preprocessor:
         self.regex = re.compile("label\s(?P<name>.+)")
 
     def parseFile(self, file):
-        lineNumber = 1
+        lineNumber = 0
         for line in file:
-            # print("#Reading: "+line)
+            # if line.strip() is '':
+            #     continue
             labelName =  self.TestForLabel(line)
-            # print("LabelName: ", labelName)
             if labelName is not None:
                 # print("#Has Label!");
-                self._labels[labelName] = lineNumber
+                self._labels[labelName.strip()] = lineNumber
 
             lineNumber = lineNumber + 1;
-            self._lines.append(line)
+            self._lines.append(line.strip())
         return self._lines
 
     def GetLabels(self):

@@ -1,6 +1,6 @@
 __all__ = ['jazHalt', 'jazLabel', 'jazGoto', 'jazGofalse', 'jazGotrue']
 
-
+import errors
 class jazHalt:
     def __init__(self):
         self.command = "halt";
@@ -13,7 +13,7 @@ class jazLabel:
         self.command = "label";
 
     def call(self, interpreter, arg):
-        interpreter.labels[arg] = interpreter.curScope.pc
+        interpreter.labels[arg] = interpreter.scopes[-1].pc
         return None
 
 class jazGoto:
@@ -23,6 +23,8 @@ class jazGoto:
     def call(self, interpreter, arg):
         if arg in interpreter.labels:
             interpreter.GoTo(interpreter.labels[arg])
+        else:
+            raise errors.UndenfinedLabelError(arg)
         return None
 
 class jazGofalse:

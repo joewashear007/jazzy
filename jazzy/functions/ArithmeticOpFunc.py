@@ -6,8 +6,8 @@ class jazAdd:
         self.command = "+";
 
     def call(self, interpreter, arg):
-        topValue1 = interpreter.GetScope().stack[-1]
-        topValue2 = interpreter.GetScope().stack[-2]
+        topValue1 = interpreter.GetScope().stack.pop()
+        topValue2 = interpreter.GetScope().stack.pop()
         result = int(topValue1) + int(topValue2)
         interpreter.GetScope().stack.append(result)
         return None
@@ -17,8 +17,8 @@ class jazSubtract:
         self.command = "-";
 
     def call(self, interpreter, arg):
-        topValue1 = interpreter.GetScope().stack[-2]
-        topValue2 = interpreter.GetScope().stack[-1]
+        topValue1 = interpreter.GetScope().stack.pop()
+        topValue2 = interpreter.GetScope().stack.pop()
         result = int(topValue1) - int(topValue2)
         interpreter.GetScope().stack.append(result)
         return None
@@ -28,8 +28,8 @@ class jazMultiply:
         self.command = "*";
 
     def call(self, interpreter, arg):
-        topValue1 = interpreter.GetScope().stack[-1]
-        topValue2 = interpreter.GetScope().stack[-2]
+        topValue1 = interpreter.GetScope().stack.pop()
+        topValue2 = interpreter.GetScope().stack.pop()
         result = int(topValue1) * int(topValue2)
         interpreter.GetScope().stack.append(result)
         return None
@@ -39,8 +39,8 @@ class jazDivide:
         self.command = "/";
 
     def call(self, interpreter, arg):
-        topValue1 = int(interpreter.GetScope().stack[-2])
-        topValue2 = int(interpreter.GetScope().stack[-1])
+        topValue1 = interpreter.GetScope().stack.pop()
+        topValue2 = interpreter.GetScope().stack.pop()
         result = int(topValue1) / int(topValue2)
         interpreter.GetScope().stack.append(int(result))
         return None
@@ -50,8 +50,8 @@ class jazDiv:
         self.command = "div";
 
     def call(self, interpreter, arg):
-        topValue1 = interpreter.GetScope().stack[-2]
-        topValue2 = interpreter.GetScope().stack[-1]
+        topValue1 = interpreter.GetScope().stack.pop()
+        topValue2 = interpreter.GetScope().stack.pop()
         result = int(topValue1) % int(topValue2)
         interpreter.GetScope().stack.append(result)
         return None

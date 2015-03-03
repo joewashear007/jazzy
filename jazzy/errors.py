@@ -18,3 +18,11 @@ class StackUnderFlowError(JazError):
 class UndenfinedVariableError(JazError):
     def __init__(self, name):
         self.message = "Variable: " + str(name) + " is being accessed before it is defined!";
+
+class UndenfinedLabelError(JazError):
+    def __init__(self, name):
+        self.message = "Label: " + str(name) + " is not defined!";
+
+class BadLineNumberError(JazError):
+    def __init__(self, name):
+        self.message = "Line : " + str(name) + " is not valid!";

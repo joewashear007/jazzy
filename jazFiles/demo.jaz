@@ -1,13 +1,13 @@
-show 
+show
 show This code illustrates parameter passing strategy.
-show 
+show
 lvalue f
 push 5
 :=
 lvalue x
 push 0
 :=
-goto beforeFunc 
+goto beforeFunc
 label 2000
 show ---------------------------------
 show after function work:
@@ -19,7 +19,7 @@ show value of f is:
 rvalue f
 print
 pop
-show 
+show
 halt
 
 label work
@@ -37,7 +37,7 @@ label work
   :=
 return
 
-label beforeFunc 
+label beforeFunc
 show before function work:
 show value of x is:
 rvalue x

@@ -6,7 +6,7 @@ class Scope:
         self.variables = {}
         self.lvalue = self
         self.rvalue = self
-        self.stack = [1, 2, 3]
+        self.stack = []
         self.name = uuid.uuid1()
 
     def CreateVar(self, name):
